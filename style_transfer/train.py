@@ -11,16 +11,13 @@ from style_transfer.utils import tensor_to_image, clip_0_1
 # style_weight=1e-2
 # content_weight=1e4
 
-# style_weight=0.02
-# content_weight=4.5
-
 dir_path = os.path.dirname(__file__)
 
 
 class Trainer:
 
-    def __init__(self, style_image: Any, content_image: Any, content_weight: float = 0.01,
-                 style_weight: float = 1, total_variation_weight: float = 0.995,
+    def __init__(self, style_image: Any, content_image: Any, content_weight: float = 0.02,
+                 style_weight: float = 4.5, total_variation_weight: float = 0.995,
                  total_variation_loss_factor: float = 1.25):
         self.content_weight = content_weight
         self.style_weight = style_weight
