@@ -8,8 +8,8 @@ For this project, I use python3.8 and TensorFlow 2.6.
 
 <div align='center'>
 <img src = 'style_transfer\content\content_1.png' height="200px">
-<img src = 'style-transfer\style_transfer\style\style_1.png' height="200px">
-<img src = 'style-transfer\style_transfer\result\content_1.png' height="200px">
+<img src = 'style_transfer\style\style_1.png' height="200px">
+<img src = 'style_transfer\result\content_1.png' height="200px">
 </div>
 
 <div align = 'center'>
