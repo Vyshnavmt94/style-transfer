@@ -1,8 +1,4 @@
-# Imports
-import numpy as np
-from PIL import Image
 import tensorflow as tf
-from scipy.optimize import fmin_l_bfgs_b
 
 
 class StyleTransfer:
@@ -51,28 +47,23 @@ class StyleTransfer:
 
         return {'content': content_dict, 'style': style_dict}
 
-    def get_layer_statistics(self, layers, outputs):
-        """
-        Look at the statistics of each layer's output
-        :param layers:
-        :param outputs:
-        :return:
-        """
-        for name, output in zip(layers, outputs):
-            print(name)
-            print("  shape: ", output.numpy().shape)
-            print("  min: ", output.numpy().min())
-            print("  max: ", output.numpy().max())
-            print("  mean: ", output.numpy().mean())
-            print("\n")
-
     def gram_matrix(self, input_tensor):
         result = tf.linalg.einsum('bijc,bijd->bcd', input_tensor, input_tensor)
         input_shape = tf.shape(input_tensor)
         num_locations = tf.cast(input_shape[1] * input_shape[2], tf.float32)
         return result / (num_locations)
 
-
-if __name__ == "__main__":
-    style_transfer = StyleTransfer()
-    style_transfer.load_vgg19()
+    # def get_layer_statistics(self, layers, outputs):
+    #     """
+    #     Look at the statistics of each layer's output
+    #     :param layers:
+    #     :param outputs:
+    #     :return:
+    #     """
+    #     for name, output in zip(layers, outputs):
+    #         print(name)
+    #         print("  shape: ", output.numpy().shape)
+    #         print("  min: ", output.numpy().min())
+    #         print("  max: ", output.numpy().max())
+    #         print("  mean: ", output.numpy().mean())
+    #         print("\n")
