@@ -22,6 +22,11 @@ def high_pass_x_y(image):
     return x_var, y_var
 
 
+def total_variation_loss(image):
+    x_deltas, y_deltas = high_pass_x_y(image)
+    return tf.reduce_sum(tf.abs(x_deltas)) + tf.reduce_sum(tf.abs(y_deltas))
+
+
 def load_img(path_to_img):
     max_dim = 512
     img = tf.io.read_file(path_to_img)

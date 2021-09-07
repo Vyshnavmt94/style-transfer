@@ -6,18 +6,21 @@ import tensorflow as tf
 import time
 import IPython.display as display
 from tqdm import tqdm
-from style_transfer.utils import tensor_to_image, high_pass_x_y, clip_0_1
+from style_transfer.utils import tensor_to_image, clip_0_1
 
 # style_weight=1e-2
 # content_weight=1e4
+
+# style_weight=0.02
+# content_weight=4.5
 
 dir_path = os.path.dirname(__file__)
 
 
 class Trainer:
 
-    def __init__(self, style_image: Any, content_image: Any, content_weight: float = 0.02,
-                 style_weight: float = 4.5, total_variation_weight: float = 0.995,
+    def __init__(self, style_image: Any, content_image: Any, content_weight: float = 0.01,
+                 style_weight: float = 1, total_variation_weight: float = 0.995,
                  total_variation_loss_factor: float = 1.25):
         self.content_weight = content_weight
         self.style_weight = style_weight
@@ -42,10 +45,6 @@ class Trainer:
         content_loss *= self.content_weight / self.style_transfer.num_content_layers
         loss = style_loss + content_loss
         return loss
-
-    def total_variation_loss(self, image):
-        x_deltas, y_deltas = high_pass_x_y(image)
-        return tf.reduce_sum(tf.abs(x_deltas)) + tf.reduce_sum(tf.abs(y_deltas))
 
     def train(self, epochs: int = 10, steps_per_epoch: int = 100,
               optimizer=tf.optimizers.Adam(learning_rate=0.02, beta_1=0.99, epsilon=1e-1)):

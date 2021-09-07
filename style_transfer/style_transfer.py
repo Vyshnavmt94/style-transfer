@@ -47,6 +47,7 @@ class StyleTransfer:
 
         return {'content': content_dict, 'style': style_dict}
 
+    # TODO: change
     def gram_matrix(self, input_tensor):
         result = tf.linalg.einsum('bijc,bijd->bcd', input_tensor, input_tensor)
         input_shape = tf.shape(input_tensor)
